@@ -3,10 +3,12 @@ import time
 import serial
 import csv
 import sys
+import os
 
 sensor = serial.Serial('COM3', 115200) #port name and baud
 signal = sensor.readline()
 filename = "eeg_" + time.strftime('%y-%m-%d-%H-%M-%S') + ".csv"
+filename = os.path.join("..", "data", filename)
 print("Recording to " + filename +"\n")
 f = open(filename,'a', newline='')
 wr=csv.writer(f)
