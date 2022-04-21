@@ -1,21 +1,21 @@
 //For recording eeg data
 //To be used with record_eeg.py
-unsigned long start, t;
+unsigned long now, prev;
 
 
 void setup() {
-  Serial.begin(9600);
-  start = millis();
+  Serial.begin(115200);
+  prev = micros();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  t = millis() - start;
-  if(t%10==0){
-    Serial.print(t);
+  now = micros();
+  if(now - prev >= 2000){
+    prev = now;
+    Serial.print(now);
     Serial.print(',');
     Serial.print(analogRead(0));
     Serial.print('\n');
-    delay(1);
   }
 }
